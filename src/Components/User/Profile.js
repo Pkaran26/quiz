@@ -3,17 +3,28 @@ import { InputText } from 'primereact/inputtext'
 import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
 import { NavLink } from 'react-router-dom'
+import { DataTable } from 'primereact/datatable'
+import { Column } from 'primereact/column'
 
-const Profile = ({ match })=>{
+const Profile = ({ match, history })=>{
   const [profile, setProfile] = useState({
-    email: '', firstname: '', lastname: ''
+    _id: '', email: '', firstname: '', lastname: ''
   })
   const [categories, setCategories]  = useState([])
   const [currentategory, setCurrentCategory]  = useState('')
   const [quizes, setQuizes]  = useState([])
 
   useEffect(()=>{
-
+    try {
+      let user = localStorage.getItem('user')
+      user = JSON.parse(user)
+      setProfile({
+        _id: user._id, email: user.email, firstname: user.firstname, lastname: user.lastname
+      })
+    } catch (e) {
+      alert('no data found!')
+      history.push('/')
+    }
   }, [])
 
   return (
@@ -22,64 +33,48 @@ const Profile = ({ match })=>{
         <Card>
           <h3>Profile</h3>
           <hr/>
-          <div className="p-fluid">
-            <div className="p-field">
-              <label>Email</label>
-              <strong>{ profile.email }</strong>
-            </div>
-            <div className="p-field">
-              <label htmlFor="firstname">Firstname</label>
-              <strong>{ profile.firstname }</strong>
-            </div>
-            <div className="p-field">
-              <label>Lastname</label>
-              <strong>{ profile.lastname }</strong>
-            </div>
-          </div>
+          <table className="profile_table">
+            <tbody>
+              <tr>
+                <td>Email</td>
+                <td>: </td>
+                <td>{ profile.email }</td>
+              </tr>
+              <tr>
+                <td>Name</td>
+                <td>: </td>
+                <td>{ profile.firstname } { profile.lastname }</td>
+              </tr>
+            </tbody>
+          </table>
         </Card>
-      </div>
-      <div className="p-col-2">
+        <br />
         <Card>
           <h3>Categories</h3>
           <hr/>
           <select
+            className="p-inputtext p-component p-filled"
             onChange={ (e)=> setCurrentCategory(e.target.value) }
             value={ currentategory }
           >
+            <option value="">select category</option>
             { categories && categories.length>0?
               categories.map((e, i)=>(
-                <option key={ i }>{ e.name }</option>
+                <option key={ i } value={ e._id }>{ e.name }</option>
               ))
             :null }
           </select>
         </Card>
       </div>
-      <div className="p-col-6">
-        <Card>
+      <div className="p-col-8">
+        <Card style={{ height: '500px' }}>
           <h3>Quiz</h3>
           <hr/>
-          <table>
-            <thead>
-              <tr>
-                <th>S No.</th>
-                <th>Category</th>
-                <th>Total Questions</th>
-                <th>Total Marks</th>
-              </tr>
-            </thead>
-            <tbody>
-              { quizes && quizes.length>0?
-                quizes.map((e, i)=>(
-                  <tr key={ i }>
-                    <td>{ i+1 }</td>
-                    <td>{ e.category_id }</td>
-                    <td>{ e.questions }</td>
-                    <td>{ e.total_marks }</td>
-                  </tr>
-                ))
-              :null }
-            </tbody>
-          </table>
+          <DataTable value={ quizes }>
+            <Column field="name" header="Name" />
+            <Column field="questions" header="Total Questions" />
+            <Column field="total_marks" header="Total Marks" />
+          </DataTable>
         </Card>
       </div>
     </div>

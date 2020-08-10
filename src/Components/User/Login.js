@@ -3,13 +3,15 @@ import { InputText } from 'primereact/inputtext'
 import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
 import { NavLink } from 'react-router-dom'
+import { SERVER_URL } from '../../config'
+import axios from 'axios'
 
 const login = {
   email: '',
   password: ''
 }
 
-const Login = ()=>{
+const Login = ({ history })=>{
   const [payload, setPayload] = useState(login)
 
   const setter = (key, value)=>{
@@ -21,7 +23,20 @@ const Login = ()=>{
 
   const handleSubmit = (e)=>{
     e.preventDefault()
-
+    axios.post(`${ SERVER_URL }/user/login`, payload)
+    .then(res=>{
+      if(res.data && res.data.status){
+        localStorage.setItem('user', JSON.stringify(res.data.user))
+        setTimeout(()=>{
+          history.push('/profile')
+        }, 100)
+      }else{
+        alert(res.data.message)
+      }
+    })
+    .catch(err=>{
+      alert('try again')
+    })
   }
 
   return (

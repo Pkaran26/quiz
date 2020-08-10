@@ -23,3 +23,11 @@ html, body, ul, h1, h2, h3, h4, h5 {
   border: 1px dotted;
   margin-top: 5px;
 }
+
+.profile_table {
+  width: 100%;
+}
+
+.profile_table tr td:first-child {
+  font-weight: bolder;
+}
