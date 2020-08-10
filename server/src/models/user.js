@@ -31,11 +31,11 @@ export const signup = async ctx=>{
     }
   }else{
     try {
-      const result = await ctx.db.collection('user').inserOne({ ...value })
+      const result = await ctx.db.collection('user').insertOne({ ...value })
       if(result && result.insertedCount){
         ctx.body = {
           status: true,
-          message: 'post added'
+          message: 'user added'
         }
       }else{
         ctx.body = {
@@ -61,7 +61,7 @@ export const login = async ctx=>{
     }
   }else{
     try {
-      const result = await ctx.db.collection('user').find({ ...value })
+      const result = await ctx.db.collection('user').find({ ...value }).toArray()
       if(result && result.length>0){
         ctx.body = {
           status: true,
@@ -114,7 +114,7 @@ export const addUserQuiz  = async ctx=>{
 
 export const userQuizList = async ctx=>{
   try {
-    const result = await ctx.db.collection('userQuiz').find({})
+    const result = await ctx.db.collection('userQuiz').find({}).toArray()
     if(result && result.length>0){
       ctx.body = {
         status: true,

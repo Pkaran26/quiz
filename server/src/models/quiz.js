@@ -54,7 +54,7 @@ export const addCategory = async ctx=>{
 
 export const categoryList = async ctx=>{
   try {
-    const result = await ctx.db.collection('category').find({})
+    const result = await ctx.db.collection('category').find({}).toArray()
     if(result && result.length>0){
       ctx.body = {
         status: true,
@@ -106,7 +106,7 @@ export const addQuestion = async ctx=>{
 
 export const questionList = async ctx=>{
   try {
-    const result = await ctx.db.collection('question').find({})
+    const result = await ctx.db.collection('question').find({}).toArray()
     if(result && result.length>0){
       ctx.body = {
         status: true,
@@ -162,7 +162,7 @@ export const quizList = async ctx=>{
     payload = { category: ctx.params.category }
   }
   try {
-    const result = await ctx.db.collection('quiz').find({})
+    const result = await ctx.db.collection('quiz').find({}).toArray()
     if(result && result.length>0){
       ctx.body = {
         status: true,
