@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
+import Header from './Components/Common/Header'
+import { Switch, Route } from 'react-router-dom'
+import Login from './Components/User/Login'
+import Signup from './Components/User/Signup'
+import Profile from './Components/User/Profile'
+import Quiz from './Components/Quiz/Quiz'
+import Dashboard from './Components/Admin/Dashboard'
+import Questions from './Components/Admin/Questions'
+import Users from './Components/Admin/Users'
 
 function App() {
+  const [user, setUser] = useState('')
+
+  const setUserDetail = (data)=>{
+    setUser(data)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header
+        user={ user }
+      />
+      <div className="container" style={{ marginTop: '40px' }}>
+        <Switch>
+          <Route path="/quiz" component={ (props)=> <Quiz { ...props } /> } exact/>
+          <Route path="/signup" component={ (props)=> <Signup { ...props } /> } exact/>
+          <Route path="/profile" component={ (props)=> <Profile setUserDetail={ setUserDetail } { ...props } /> } exact/>
+          <Route path="/" component={ (props)=> <Login { ...props } /> } exact/>
+          <Route path="/admin/dashboard" component={ (props)=> <Dashboard { ...props } /> } exact/>
+          <Route path="/admin/questions" component={ (props)=> <Questions { ...props } /> } exact/>
+          <Route path="/admin/users" component={ (props)=> <Users { ...props } /> } exact/>
+        </Switch>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
