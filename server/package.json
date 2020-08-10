@@ -12,6 +12,7 @@
     "@babel/core": "^7.10.2",
     "@hapi/joi": "^17.1.1",
     "cors": "^2.8.5",
+    "joi": "^17.2.0",
     "koa": "^2.12.1",
     "koa-bodyparser": "^4.3.0",
     "koa-logger": "^3.2.1",
