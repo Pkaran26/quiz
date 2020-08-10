@@ -17,6 +17,7 @@ const question = Joi.object({
 })
 
 const quiz = Joi.object({
+  category_id: Joi.string().required(),
   questions: Joi.array().required(),
   total_marks: Joi.number().required()
 })
