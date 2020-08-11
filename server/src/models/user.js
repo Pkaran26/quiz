@@ -82,6 +82,28 @@ export const login = async ctx=>{
   }
 }
 
+export const getUsers = async ctx=>{
+  try {
+    const result = await ctx.db.collection('user').find({}).toArray()
+    if(result && result.length>0){
+      ctx.body = {
+        status: true,
+        data: result
+      }
+    }else{
+      ctx.body = {
+        status: false,
+        message: 'invalid details'
+      }
+    }
+  } catch (e) {
+    ctx.body = {
+      status: false,
+      message: 'db error'
+    }
+  }
+}
+
 export const addUserQuiz  = async ctx=>{
   const { err, value } = userQuiz.validate(ctx.request.body)
   if(err){
@@ -91,7 +113,7 @@ export const addUserQuiz  = async ctx=>{
     }
   }else{
     try {
-      const result = await ctx.db.collection('userQuiz').inserOne({ ...value })
+      const result = await ctx.db.collection('userQuiz').insertOne({ ...value })
       if(result && result.insertedCount){
         ctx.body = {
           status: true,

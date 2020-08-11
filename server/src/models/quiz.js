@@ -7,13 +7,11 @@ const category = Joi.object({
 const question = Joi.object({
   question: Joi.string().required(),
   category: Joi.string().required(),
-  options: {
-    a: Joi.string().required(),
-    b: Joi.string().required(),
-    c: Joi.string().required(),
-    d: Joi.string().required(),
-    ans: Joi.string().required()
-  }
+  a: Joi.string().required(),
+  b: Joi.string().required(),
+  c: Joi.string().required(),
+  d: Joi.string().required(),
+  ans: Joi.string().required()
 })
 
 const quiz = Joi.object({
@@ -32,7 +30,7 @@ export const addCategory = async ctx=>{
     }
   }else{
     try {
-      const result = await ctx.db.collection('category').inserOne({ ...value })
+      const result = await ctx.db.collection('category').insertOne({ ...value })
       if(result && result.insertedCount){
         ctx.body = {
           status: true,
@@ -45,6 +43,7 @@ export const addCategory = async ctx=>{
         }
       }
     } catch (e) {
+      console.log(e);
       ctx.body = {
         status: false,
         message: 'db error'
@@ -68,6 +67,7 @@ export const categoryList = async ctx=>{
       }
     }
   } catch (e) {
+    console.log(e);
     ctx.body = {
       status: false,
       message: 'db error'
@@ -84,7 +84,7 @@ export const addQuestion = async ctx=>{
     }
   }else{
     try {
-      const result = await ctx.db.collection('question').inserOne({ ...value })
+      const result = await ctx.db.collection('question').insertOne({ ...value })
       if(result && result.insertedCount){
         ctx.body = {
           status: true,
@@ -136,7 +136,7 @@ export const addQuiz = async ctx=>{
     }
   }else{
     try {
-      const result = await ctx.db.collection('quiz').inserOne({ ...value })
+      const result = await ctx.db.collection('quiz').insertOne({ ...value })
       if(result && result.insertedCount){
         ctx.body = {
           status: true,
