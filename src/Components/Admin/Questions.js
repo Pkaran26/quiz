@@ -105,7 +105,7 @@ const Questions = ()=>{
         <Menu />
       </div>
       <div className="p-col-10">
-        <Card>
+        <Card style={{ height: '500px' }}>
           <h2>Questions</h2>
           <hr />
           <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
@@ -152,80 +152,104 @@ const Questions = ()=>{
             </TabPanel>
             <TabPanel header="Add New Question">
               <form className="p-fluid" onSubmit={ questionSubmit }>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td colSpan="4">
+                        <div className="p-field">
+                          <label htmlFor="question">Question</label>
+                          <InputText
+                            id="question"
+                            type="text"
+                            value={ question.question }
+                            onChange={(e) => { questionSetter('question', e.target.value)} }
+                            required={ true }
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div className="p-field">
+                          <label htmlFor="opa">Option A</label>
+                          <InputText
+                            id="opa"
+                            type="text"
+                            value={ question.a }
+                            onChange={(e) => { questionSetter('a', e.target.value)} }
+                            required={ true }
+                          />
+                        </div>
+                      </td>
+                      <td>
+                        <div className="p-field">
+                          <label htmlFor="opb">Option B</label>
+                          <InputText
+                            id="opb"
+                            type="text"
+                            value={ question.b }
+                            onChange={(e) => { questionSetter('b', e.target.value)} }
+                            required={ true }
+                          />
+                        </div>
+                      </td>
+                      <td>
+                        <div className="p-field">
+                          <label htmlFor="opc">Option C</label>
+                          <InputText
+                            id="opc"
+                            type="text"
+                            value={ question.c }
+                            onChange={(e) => { questionSetter('c', e.target.value)} }
+                            required={ true }
+                          />
+                        </div>
+                      </td>
+                      <td>
+                      <div className="p-field">
+                        <label htmlFor="opd">Option D</label>
+                        <InputText
+                          id="opd"
+                          type="text"
+                          value={ question.d }
+                          onChange={(e) => { questionSetter('d', e.target.value)} }
+                          required={ true }
+                        />
+                      </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan="2">
+                        <div className="p-field">
+                          <label htmlFor="category">Category</label>
+                          <Dropdown
+                            optionLabel="name"
+                            optionValue="name"
+                            value={ question.category }
+                            options={ categories }
+                            onChange={(e) => { questionSetter('category', e.value) } }
+                            placeholder="Select a Category"
+                            required={ true }
+                          />
+                        </div>
+                      </td>
+                      <td colSpan="2">
+                        <div className="p-field">
+                          <label htmlFor="answer">Answer</label>
+                          <InputText
+                            id="answer"
+                            type="text"
+                            value={ question.ans }
+                            onChange={(e) => { questionSetter('ans', e.target.value)} }
+                            required={ true }
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
                 <div className="p-field">
-                  <label htmlFor="question">Question</label>
-                  <InputText
-                    id="question"
-                    type="text"
-                    value={ question.question }
-                    onChange={(e) => { questionSetter('question', e.target.value)} }
-                    required={ true }
-                  />
-                </div>
-                <div className="p-field">
-                  <label htmlFor="category">Category</label>
-                  <Dropdown
-                    optionLabel="name"
-                    optionValue="name"
-                    value={ question.category }
-                    options={ categories }
-                    onChange={(e) => { questionSetter('category', e.value) } }
-                    placeholder="Select a Category"
-                    required={ true }
-                  />
-                </div>
-                <div className="p-field">
-                  <label htmlFor="answer">Answer</label>
-                  <InputText
-                    id="answer"
-                    type="text"
-                    value={ question.ans }
-                    onChange={(e) => { questionSetter('ans', e.target.value)} }
-                    required={ true }
-                  />
-                </div>
-                <div className="p-field">
-                  <label htmlFor="opa">Option A</label>
-                  <InputText
-                    id="opa"
-                    type="text"
-                    value={ question.a }
-                    onChange={(e) => { questionSetter('a', e.target.value)} }
-                    required={ true }
-                  />
-                </div>
-                <div className="p-field">
-                  <label htmlFor="opb">Option B</label>
-                  <InputText
-                    id="opb"
-                    type="text"
-                    value={ question.b }
-                    onChange={(e) => { questionSetter('b', e.target.value)} }
-                    required={ true }
-                  />
-                </div>
-                <div className="p-field">
-                  <label htmlFor="opc">Option C</label>
-                  <InputText
-                    id="opc"
-                    type="text"
-                    value={ question.c }
-                    onChange={(e) => { questionSetter('c', e.target.value)} }
-                    required={ true }
-                  />
-                </div>
-                <div className="p-field">
-                  <label htmlFor="opd">Option D</label>
-                  <InputText
-                    id="opd"
-                    type="text"
-                    value={ question.d }
-                    onChange={(e) => { questionSetter('d', e.target.value)} }
-                    required={ true }
-                  />
-                </div>
-                <div className="p-field">
-                  <Button label="Add Question" />
+                  <Button label="Add Question" style={{ width: '140px' }} />
                 </div>
               </form>
             </TabPanel>

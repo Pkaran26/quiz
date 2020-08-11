@@ -33,12 +33,9 @@ const Users = ()=>{
         <Menu />
       </div>
       <div className="p-col-10">
-        <Card>
+        <Card style={{ height: '500px' }}>
           <h2>Users</h2>
           <hr />
-        </Card>
-        <br/>
-        <Card>
           <DataTable value={ users }>
             { columns.map((e, i)=>(
               <Column key={ i } field={ e.field } header={ e.header } />
