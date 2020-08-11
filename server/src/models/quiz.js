@@ -107,7 +107,8 @@ export const addQuestion = async ctx=>{
 
 export const questionList = async ctx=>{
   try {
-    const result = await ctx.db.collection('question').find({}).toArray()
+    const payload = ctx.query && ctx.query.category? { category: ctx.query.category } : {}
+    const result = await ctx.db.collection('question').find(payload).toArray()
     if(result && result.length>0){
       ctx.body = {
         status: true,
