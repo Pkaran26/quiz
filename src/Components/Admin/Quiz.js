@@ -57,8 +57,12 @@ const QuizManager = ()=>{
     })
   }
 
-  const getQuestions = ()=>{
-    axios.get(`${ SERVER_URL }/quiz/question`)
+  const getQuestions = (value=null)=>{
+    let url = `${ SERVER_URL }/quiz/question`
+    if(value){
+      url = `${ SERVER_URL }/quiz/question?category=${ value }`
+    }
+    axios.get(url)
     .then(res=>{
       console.log(res.data);
       if(res.data && res.data.status){
