@@ -9,6 +9,7 @@ import Quiz from './Components/Quiz/Quiz'
 import Dashboard from './Components/Admin/Dashboard'
 import Questions from './Components/Admin/Questions'
 import Users from './Components/Admin/Users'
+import QuizManager from './Components/Admin/Quiz'
 
 function App() {
   const [user, setUser] = useState('')
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" component={ (props)=> <Login { ...props } /> } exact/>
           <Route path="/admin/dashboard" component={ (props)=> <Dashboard { ...props } /> } exact/>
           <Route path="/admin/questions" component={ (props)=> <Questions { ...props } /> } exact/>
+          <Route path="/admin/quiz" component={ (props)=> <QuizManager { ...props } /> } exact/>
           <Route path="/admin/users" component={ (props)=> <Users { ...props } /> } exact/>
         </Switch>
       </div>

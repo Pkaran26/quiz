@@ -224,7 +224,7 @@ const Questions = ()=>{
                           <label htmlFor="category">Category</label>
                           <Dropdown
                             optionLabel="name"
-                            optionValue="name"
+                            optionValue="_id"
                             value={ question.category }
                             options={ categories }
                             onChange={(e) => { questionSetter('category', e.value) } }

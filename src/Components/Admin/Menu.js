@@ -16,6 +16,9 @@ const Menu = ()=>(
         <NavLink to="/admin/questions">Questions</NavLink>
       </li>
       <li>
+        <NavLink to="/admin/quiz">Quiz</NavLink>
+      </li>
+      <li>
         <NavLink to="/admin/users">Users</NavLink>
       </li>
       <li>
