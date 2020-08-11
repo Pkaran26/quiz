@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import Menu from './Menu'
-import Cards from './Cards'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { TabView, TabPanel } from 'primereact/tabview'
@@ -31,9 +30,10 @@ const Questions = ()=>{
   useEffect(()=>{
     getCategories()
     getQuestions()
+    // eslint-disable-next-line
   }, [])
 
-  const getCategories = ()=>{
+  const getCategories = useCallback(()=>{
     axios.get(`${ SERVER_URL }/quiz/category`)
     .then(res=>{
       if(res.data && res.data.status){
@@ -43,7 +43,7 @@ const Questions = ()=>{
     .catch(err=>{
 
     })
-  }
+  }, [])
 
   const categorySubmit = (e)=>{
     e.preventDefault()
@@ -69,7 +69,7 @@ const Questions = ()=>{
     })
   }
 
-  const getQuestions = ()=>{
+  const getQuestions = useCallback(()=>{
     axios.get(`${ SERVER_URL }/quiz/question`)
     .then(res=>{
       console.log(res.data);
@@ -80,7 +80,7 @@ const Questions = ()=>{
     .catch(err=>{
 
     })
-  }
+  }, [])
 
   const questionSubmit = (e)=>{
     e.preventDefault()

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import Menu from './Menu'
-import Cards from './Cards'
 import { DataTable } from 'primereact/datatable'
 import { Column } from 'primereact/column'
 import { TabView, TabPanel } from 'primereact/tabview'
@@ -43,9 +42,10 @@ const QuizManager = ()=>{
   useEffect(()=>{
     getCategories()
     getQuiz()
+    // eslint-disable-next-line
   }, [])
 
-  const getCategories = ()=>{
+  const getCategories = useCallback(()=>{
     axios.get(`${ SERVER_URL }/quiz/category`)
     .then(res=>{
       if(res.data && res.data.status){
@@ -55,9 +55,9 @@ const QuizManager = ()=>{
     .catch(err=>{
 
     })
-  }
+  }, [])
 
-  const getQuestions = (value=null)=>{
+  const getQuestions = useCallback((value=null)=>{
     let url = `${ SERVER_URL }/quiz/question`
     if(value){
       url = `${ SERVER_URL }/quiz/question?category=${ value }`
@@ -72,9 +72,9 @@ const QuizManager = ()=>{
     .catch(err=>{
 
     })
-  }
+  }, [])
 
-  const getQuiz = ()=>{
+  const getQuiz = useCallback(()=>{
     axios.get(`${ SERVER_URL }/quiz`)
     .then(res=>{
       if(res.data && res.data.status){
@@ -84,7 +84,7 @@ const QuizManager = ()=>{
     .catch(err=>{
 
     })
-  }
+  }, [])
 
   const quizSubmit = (e)=>{
     e.preventDefault()
